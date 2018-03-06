@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bike.cs" />
+    <Compile Include="BikeKind.cs" />
+    <Compile Include="IPersistable.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Rentee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

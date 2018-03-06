@@ -8,10 +8,39 @@ namespace Entities
 {
     public class Rentee
     {
+        #region Fields
         private string name;
         private string address;
         private string phoneNumber;
         private DateTime registerDate;
+        private int id;
+        #endregion
+
+        #region Contructor
+        public Rentee(string name, string address, string phoneNumber, DateTime registerDate, int id)
+        {
+            Name = name;
+            Address = address;
+            PhoneNumber = phoneNumber;
+            RegisterDate = registerDate;
+            Id = id;
+        }
+        #endregion
+
+        #region Functions
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+        #endregion
+
+        #region Properties
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
 
         public DateTime RegisterDate
         {
@@ -36,6 +65,6 @@ namespace Entities
             get { return name; }
             set { name = value; }
         }
-
+        #endregion
     }
 }
