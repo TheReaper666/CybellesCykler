@@ -8,5 +8,10 @@ namespace Business
 {
     public class DataController
     {
+        public DataController(string conString)
+        {
+
+        }
+
     }
 }

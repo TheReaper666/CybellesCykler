@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Order
+    public class Order : IPersistable
     {
         #region Fields
         private Bike bike;

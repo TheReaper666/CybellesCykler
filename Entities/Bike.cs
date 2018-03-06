@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Bike
+    public class Bike : IPersistable
     {
         #region Fields
         private decimal pricePerDay;

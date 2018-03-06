@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Rentee
+    public class Rentee : IPersistable
     {
         #region Fields
         private string name;

@@ -8,6 +8,6 @@ namespace Entities
 {
     public interface IPersistable
     {
-        // I have No Knowlegde of this.
+      int Id { get; set; }
     }
 }
