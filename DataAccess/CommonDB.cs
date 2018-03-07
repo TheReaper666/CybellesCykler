@@ -8,5 +8,16 @@ namespace DataAccess
 {
     public class CommonDB
     {
+        protected readonly string connectionString;
+        
+        public CommonDB(string conString)
+        {
+
+        }
+
+        protected executeQuery()
+        {
+
+        }
     }
 }
