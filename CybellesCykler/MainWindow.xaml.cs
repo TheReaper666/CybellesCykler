@@ -13,29 +13,35 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Entities;
+using DataAccess;
 
 namespace CybellesCykler
 {
     public partial class MainWindow : Window
     {
+        DbHandler dbh;
         public MainWindow()
         {
             InitializeComponent();
-            
+           
+            dbh = new DbHandler();
+            this.DataContext = dbh;
         }
 
         private void BtnShowRentees_Click(object sender, RoutedEventArgs e)
         {
+            DtgSelected.ItemsSource = dbh.GetAllRentees();
         }
 
         private void BtnShowBikes_Click(object sender, RoutedEventArgs e)
         {
-
+            DtgSelected.ItemsSource = dbh.GetAllBikes();
         }
 
         private void BtnShowOrders_Click(object sender, RoutedEventArgs e)
         {
-
+            Orders WO = new Orders();
+            WO.ShowDialog();
         }
     }
 }

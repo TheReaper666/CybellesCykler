@@ -10,18 +10,17 @@ namespace DataAccess
 {
     public class CommonDB
     {
-        //ConString = Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CybellesCyklerDB;Integrated Security=True;
-        protected readonly string connectionString;
-        
+        string connectionString;
         public CommonDB(string conString)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(conString))
                 {
                     connection.Open();
                     connection.Close();
                 }
+                connectionString = conString;
             }
             catch (SqlException e)
             {

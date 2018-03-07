@@ -11,10 +11,11 @@ namespace DataAccess
 {
     public class DbHandler
     {
+        protected readonly string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog = CybellesCyklerDB; Integrated Security = True;";
         CommonDB cdb;
-        public DbHandler(string conString)
+        public DbHandler()
         {
-            cdb = new CommonDB(conString);
+            cdb = new CommonDB(connectionString);
         }
 
         #region GetMetoder
@@ -123,7 +124,6 @@ namespace DataAccess
             }
             return OCBike;
         }
-
         public Bike GetBike(int id)
         {
             string query = $"SELECT * FROM Bikes WHERE ID={id}";
