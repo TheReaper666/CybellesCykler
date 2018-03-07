@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,24 @@ namespace DataAccess
         }
 
         #region GetMetoder
+        public ObservableCollection<Rentee> GetAllRentees()
+        {
+            string query = $"SELECT * FROM Renters";
+            DataTable dt = cdb.execute(query);
+            ObservableCollection<Rentee> OCRentee = new ObservableCollection<Rentee>();
+            DataTableReader reader = new DataTableReader(dt);
+            while (reader.Read())
+            {
+                int tempId = Convert.ToInt32(reader["ID"]);
+                string tempName = (string)reader["Name"];
+                string tempPhoneNumber = (string)reader["PhoneNumber"];
+                string tempPhysAddress = (string)reader["PhysAddress"];
+                DateTime tempRegisterDate = (DateTime)reader["RegisterDate"];
+                Rentee tempRentee = new Rentee(tempName, tempPhysAddress, tempPhoneNumber, tempRegisterDate, tempId);
+                OCRentee.Add(tempRentee);
+            }
+            return OCRentee;
+        }
         public Rentee GetRentee(int id)
         {
             string query = $"SELECT * FROM Renters WHERE ID={id}";
@@ -34,6 +53,33 @@ namespace DataAccess
             }
             return tempRentee;
         }
+        public ObservableCollection<Order> GetAllOrders()
+        {
+            string query = $"SELECT Orders.OrderID, Orders.OrderDate, Orders.DeliverDate, Bikes.ID, Bikes.Kind, Bikes.PricePerDay, Bikes.BikeDescription, Renters.ID, Renters.Name, Renters.PhoneNumber, Renters.PhysAddress, Renters.RegisterDate FROM Bikes INNER JOIN Orders ON Bikes.ID = Orders.BikeID INNER JOIN Renters ON Orders.RenteeID = Renters.ID";
+            DataTable dt = cdb.execute(query);
+            ObservableCollection<Order> OCOrder = new ObservableCollection<Order>();
+            DataTableReader reader = new DataTableReader(dt);
+            while (reader.Read())
+            {
+                int tempId = Convert.ToInt32(reader["OrderID"]);
+                DateTime tempOrderDate = (DateTime)reader["OrderDate"];
+                DateTime tempDeliverDate = (DateTime)reader["DeliverDate"];
+                int tempBikeId = Convert.ToInt32(reader["ID"]);
+                string tempDescription = (string)reader["BikeDescription"];
+                BikeKind tempKind = (BikeKind)reader["Kind"];
+                decimal tempPricePerDay = (decimal)reader["PricePerDay"];
+                int tempRenteeId = Convert.ToInt32(reader["ID"]);
+                string tempName = (string)reader["Name"];
+                string tempPhoneNumber = (string)reader["PhoneNumber"];
+                string tempPhysAddress = (string)reader["PhysAddress"];
+                DateTime tempRegisterDate = (DateTime)reader["RegisterDate"];
+                Rentee tempRentee = new Rentee(tempName, tempPhysAddress, tempPhoneNumber, tempRegisterDate, tempId);
+                Bike tempBike = new Bike(tempPricePerDay, tempDescription, tempKind, tempId);
+                Order tempOrder = new Order(tempBike,tempRentee,tempOrderDate,tempDeliverDate,tempId);
+                OCOrder.Add(tempOrder);
+            }
+            return OCOrder;
+        }
         public Order GetOrder(int id)
         {
             string query = $"SELECT * FROM Orders WHERE ID={id}";
@@ -45,12 +91,39 @@ namespace DataAccess
                 int tempId = Convert.ToInt32(reader["OrderID"]);
                 DateTime tempOrderDate = (DateTime)reader["OrderDate"];
                 DateTime tempDeliverDate = (DateTime)reader["DeliverDate"];
-                int tempBikeId = Convert.ToInt32(reader["BikeID"]);
-                int tempRenteeId = Convert.ToInt32(reader["RenteeID"]);
-                tempOrder = new Order();
+                int tempBikeId = Convert.ToInt32(reader["ID"]);
+                string tempDescription = (string)reader["BikeDescription"];
+                BikeKind tempKind = (BikeKind)reader["Kind"];
+                decimal tempPricePerDay = (decimal)reader["PricePerDay"];
+                int tempRenteeId = Convert.ToInt32(reader["ID"]);
+                string tempName = (string)reader["Name"];
+                string tempPhoneNumber = (string)reader["PhoneNumber"];
+                string tempPhysAddress = (string)reader["PhysAddress"];
+                DateTime tempRegisterDate = (DateTime)reader["RegisterDate"];
+                Rentee tempRentee = new Rentee(tempName, tempPhysAddress, tempPhoneNumber, tempRegisterDate, tempId);
+                Bike tempBike = new Bike(tempPricePerDay, tempDescription, tempKind, tempId);
+                tempOrder = new Order(tempBike, tempRentee, tempOrderDate, tempDeliverDate, tempId);
             }
             return tempOrder;
         }
+        public ObservableCollection<Bike> GetAllBikes()
+        {
+            string query = $"SELECT * FROM Bikes";
+            DataTable dt = cdb.execute(query);
+            ObservableCollection<Bike> OCBike = new ObservableCollection<Bike>();
+            DataTableReader reader = new DataTableReader(dt);
+            while (reader.Read())
+            {
+                int tempId = Convert.ToInt32(reader["ID"]);
+                string tempDescription = (string)reader["BikeDescription"];
+                BikeKind tempKind = (BikeKind)reader["Kind"];
+                decimal tempPricePerDay = (decimal)reader["PricePerDay"];
+                Bike tempBike = new Bike(tempPricePerDay, tempDescription, tempKind, tempId);
+                OCBike.Add(tempBike);
+            }
+            return OCBike;
+        }
+
         public Bike GetBike(int id)
         {
             string query = $"SELECT * FROM Bikes WHERE ID={id}";
