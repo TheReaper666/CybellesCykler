@@ -25,6 +25,7 @@ namespace Entities
             DeliveryDate = deliveryDate;
             Id = id;
         }
+        public Order() { }
         #endregion
 
         #region Funtions

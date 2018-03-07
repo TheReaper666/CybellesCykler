@@ -25,6 +25,7 @@ namespace Entities
             RegisterDate = registerDate;
             Id = id;
         }
+        public Rentee() { }
         #endregion
 
         #region Functions

@@ -23,6 +23,7 @@ namespace Entities
             Kind = kind;
             Id = id;
         }
+        public Bike() { }
         #endregion
 
         #region Properties
